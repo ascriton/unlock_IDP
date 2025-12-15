@@ -1,29 +1,27 @@
-// Food items configuration - Two column layout for smartphone
+// Food items configuration - Organic mindmap layout for smartphone
 const foodItems = [
-    // Two column grid layout
-    // Column 1
-    { id: 'apples', name: 'Pommes', image: 'Pommes', category: 'fruits-vegetables', price: 3.50, x: 10, y: 30, width: 185, height: 50 },
-    { id: 'bread', name: 'Pain', image: 'Pain', category: 'grains', price: 3.10, x: 10, y: 100, width: 185, height: 50, icon: 'bread' },
-    { id: 'fish', name: 'Poisson', image: 'Poisson', category: 'proteins', price: 12.50, x: 10, y: 170, width: 185, height: 50, icon: 'fish' },
-    { id: 'lasagna', name: 'Lasagnes', image: 'Lasagnes', category: 'others', price: 8.50, x: 10, y: 240, width: 185, height: 50, icon: 'lasagna' },
-    { id: 'carrots', name: 'Carottes', image: 'Carottes', category: 'fruits-vegetables', price: 2.20, x: 10, y: 310, width: 185, height: 50, icon: 'carrot' },
-    { id: 'meat', name: 'Viande', image: 'Viande', category: 'proteins', price: 15.00, x: 10, y: 380, width: 185, height: 50, icon: 'meat' },
-    { id: 'bananas', name: 'Bananes', image: 'Bananes', category: 'fruits-vegetables', price: 2.80, x: 10, y: 450, width: 185, height: 50, icon: 'banana' },
-    { id: 'pasta', name: 'Pâtes', image: 'Pâtes', category: 'grains', price: 2.90, x: 10, y: 520, width: 185, height: 50, icon: 'pasta' },
-    { id: 'gum', name: 'Chewing-gum', image: 'Chewing-gum', category: 'others', price: 4.50, x: 10, y: 590, width: 185, height: 50, icon: 'gum' },
-    { id: 'lettuce', name: 'Laitue', image: 'Laitue', category: 'fruits-vegetables', price: 1.90, x: 10, y: 660, width: 185, height: 50, icon: 'lettuce' },
-    { id: 'cheese', name: 'Fromage', image: 'Fromage', category: 'proteins', price: 8.30, x: 10, y: 730, width: 185, height: 50, icon: 'cheese' },
-    { id: 'rice', name: 'Riz', image: 'Riz', category: 'grains', price: 4.50, x: 10, y: 800, width: 185, height: 50, icon: 'rice' },
+    // Central items (larger, prominent)
+    { id: 'apples', name: 'Pommes', image: 'Pommes', category: 'fruits-vegetables', price: 3.50, x: 80, y: 50, width: 100, height: 100 },
+    { id: 'meat', name: 'Viande', image: 'Viande', category: 'proteins', price: 15.00, x: 250, y: 80, width: 95, height: 95 },
     
-    // Column 2
-    { id: 'strawberries', name: 'Fraises', image: 'Fraises', category: 'fruits-vegetables', price: 3.20, x: 205, y: 30, width: 185, height: 50, icon: 'strawberry' },
-    { id: 'chocolate', name: 'Chocolat', image: 'Chocolat', category: 'others', price: 6.20, x: 205, y: 100, width: 185, height: 50, icon: 'chocolate' },
-    { id: 'cereals', name: 'Céréales', image: 'Céréales', category: 'grains', price: 4.80, x: 205, y: 170, width: 185, height: 50, icon: 'cereal' },
-    { id: 'eggs', name: 'Œufs', image: 'egg', category: 'proteins', price: 4.20, x: 205, y: 240, width: 185, height: 50, icon: 'egg' },
-    { id: 'baguette', name: 'Baguette', image: 'Baguette', category: 'grains', price: 2.40, x: 205, y: 310, width: 185, height: 50, icon: 'baguette' },
-    { id: 'tomatoes', name: 'Tomates', image: 'Tomates', category: 'fruits-vegetables', price: 2.60, x: 205, y: 380, width: 185, height: 50, icon: 'tomato' },
-    { id: 'cookies', name: 'Biscuits', image: 'Biscuits', category: 'others', price: 5.80, x: 205, y: 450, width: 185, height: 50, icon: 'cookie' },
-    { id: 'broccoli', name: 'Brocoli', image: 'Brocoli', category: 'fruits-vegetables', price: 2.40, x: 205, y: 520, width: 185, height: 50, icon: 'broccoli' }
+    // Medium items spread around
+    { id: 'bread', name: 'Pain', image: 'Pain', category: 'grains', price: 3.10, x: 20, y: 180, width: 75, height: 75 },
+    { id: 'fish', name: 'Poisson', image: 'Poisson', category: 'proteins', price: 12.50, x: 130, y: 200, width: 80, height: 80 },
+    { id: 'chocolate', name: 'Chocolat', image: 'Chocolat', category: 'others', price: 6.20, x: 260, y: 210, width: 70, height: 70 },
+    { id: 'carrots', name: 'Carottes', image: 'Carottes', category: 'fruits-vegetables', price: 2.20, x: 50, y: 290, width: 60, height: 60 },
+    
+    // Smaller items scattered
+    { id: 'bananas', name: 'Bananes', image: 'Bananes', category: 'fruits-vegetables', price: 2.80, x: 150, y: 310, width: 65, height: 65 },
+    { id: 'cheese', name: 'Fromage', image: 'Fromage', category: 'proteins', price: 8.30, x: 270, y: 300, width: 55, height: 55 },
+    { id: 'pasta', name: 'Pâtes', image: 'Pâtes', category: 'grains', price: 2.90, x: 30, y: 380, width: 70, height: 70 },
+    { id: 'rice', name: 'Riz', image: 'Riz', category: 'grains', price: 4.50, x: 140, y: 400, width: 65, height: 65 },
+    
+    // Bottom scattered items
+    { id: 'strawberries', name: 'Fraises', image: 'Fraises', category: 'fruits-vegetables', price: 3.20, x: 250, y: 380, width: 60, height: 60 },
+    { id: 'baguette', name: 'Baguette', image: 'Baguette', category: 'grains', price: 2.40, x: 80, y: 450, width: 55, height: 55 },
+    { id: 'tomatoes', name: 'Tomates', image: 'Tomates', category: 'fruits-vegetables', price: 2.60, x: 180, y: 470, width: 50, height: 50 },
+    { id: 'cookies', name: 'Biscuits', image: 'Biscuits', category: 'others', price: 5.80, x: 270, y: 450, width: 60, height: 60 },
+    { id: 'lettuce', name: 'Laitue', image: 'Laitue', category: 'fruits-vegetables', price: 1.90, x: 20, y: 520, width: 50, height: 50 }
 ];
 
 // SVG Icons collection
@@ -97,12 +95,12 @@ class SelectionManager {
     }
 
     setupCanvas() {
-        // Set canvas size for smartphone two-column layout
-        const containerWidth = this.canvas.parentElement.clientWidth - 10; // Account for minimal padding
+        // Set canvas size for smartphone organic mindmap layout
+        const containerWidth = this.canvas.parentElement.clientWidth - 10;
         
-        // Smartphone-optimized two-column layout
+        // Smartphone-optimized organic layout
         const maxWidth = Math.min(containerWidth, 400);
-        const canvasHeight = 600; // Shorter canvas for two-column grid
+        const canvasHeight = 650; // Adjusted for organic layout
         
         this.scaleFactor = maxWidth / 400;
         this.canvas.width = 400;
@@ -138,30 +136,47 @@ class SelectionManager {
     drawFoodItem(item) {
         const ctx = this.ctx;
         const isSelected = this.selectedItems.has(item.id);
+        const centerX = item.x + item.width / 2;
+        const centerY = item.y + item.height / 2;
+        const radius = Math.max(item.width, item.height) / 2;
         
-        // Draw item background (selection highlight)
+        // Draw soft shadow for depth
+        ctx.fillStyle = isSelected ? 'rgba(39, 174, 96, 0.15)' : 'rgba(0, 0, 0, 0.08)';
+        ctx.beginPath();
+        ctx.arc(centerX + 2, centerY + 3, radius + 2, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Draw circular selection highlight
         if (isSelected) {
             ctx.fillStyle = '#27ae60';
-            ctx.fillRect(item.x - 2, item.y - 2, item.width + 4, item.height + 4);
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius + 3, 0, Math.PI * 2);
+            ctx.fill();
         }
         
-        // Draw item border
-        ctx.strokeStyle = isSelected ? '#1e8449' : '#ccc';
-        ctx.lineWidth = isSelected ? 2 : 1;
-        ctx.strokeRect(item.x, item.y, item.width, item.height);
-        
-        // Draw item background
+        // Draw main circle
         ctx.fillStyle = isSelected ? '#e8f8f0' : '#ffffff';
-        ctx.fillRect(item.x, item.y, item.width, item.height);
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+        ctx.fill();
         
-        // Draw image centered in the box (larger)
-        this.drawImage(item.image, item.x + (item.width - 36) / 2, item.y + 8, 36, 36);
+        // Draw circle border
+        ctx.strokeStyle = isSelected ? '#1e8449' : '#ddd';
+        ctx.lineWidth = isSelected ? 2 : 1;
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+        ctx.stroke();
         
-        // Draw price on the right side of the box
+        // Draw image centered in circle
+        if (item.image) {
+            this.drawImage(item.image, centerX - item.width / 2 + 5, centerY - item.height / 2 + 5, item.width - 10, item.height - 10);
+        }
+        
+        // Draw price below the circle
         ctx.font = 'bold 10px Arial';
         ctx.fillStyle = isSelected ? '#27ae60' : '#e74c3c';
         ctx.textAlign = 'center';
-        ctx.fillText(`€${item.price.toFixed(2).replace('.', ',')}`, item.x + item.width + 20, item.y + item.height / 2 + 4);
+        ctx.fillText(`€${item.price.toFixed(2).replace('.', ',')}`, centerX, centerY + radius + 15);
     }
 
     // Draw image from file
@@ -198,10 +213,14 @@ class SelectionManager {
         const x = (event.clientX - rect.left) * scaleX;
         const y = (event.clientY - rect.top) * scaleY;
         
-        const clickedItem = foodItems.find(item => 
-            x >= item.x && x <= item.x + item.width &&
-            y >= item.y && y <= item.y + item.height
-        );
+        // Check for clicks on circular items
+        const clickedItem = foodItems.find(item => {
+            const centerX = item.x + item.width / 2;
+            const centerY = item.y + item.height / 2;
+            const radius = Math.max(item.width, item.height) / 2;
+            const distance = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+            return distance <= radius;
+        });
         
         if (clickedItem) {
             this.toggleSelection(clickedItem.id);
