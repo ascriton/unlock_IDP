@@ -1,0 +1,25 @@
+name;price;link;category
+Leek;19.99;http://example.com/product-a;Vegetables
+Banana;29.99;http://example.com/product-b;Fruits
+Apple;39.99;http://example.com/product-c;Fruits
+Carrot;9.99;http://example.com/product-d;Vegetables
+Orange;24.99;http://example.com/product-e;Fruits
+Pasta;49.99;http://example.com/product-f;Grains
+Rice;59.99;http://example.com/product-g;Grains
+Bread;14.99;http://example.com/product-h;Grains
+Milk;34.99;http://example.com/product-i;Protein
+Cheese;44.99;http://example.com/product-j;Protein
+Yogurt;27.99;http://example.com/product-k;Protein
+Butter;54.99;http://example.com/product-l;Protein
+Spinach;22.99;http://example.com/product-m;Vegetables
+Grapes;31.99;http://example.com/product-n;Fruits
+Chicken;64.99;http://example.com/product-o;Protein
+Beef;74.99;http://example.com/product-p;Protein
+Fish;69.99;http://example.com/product-q;Protein
+Tomato;18.99;http://example.com/product-r;Vegetables
+Cucumber;16.99;http://example.com/product-s;Vegetables
+Tofu;39.99;http://example.com/product-t;Protein
+Chickpeas;29.99;http://example.com/product-u;Grains
+Lentils;24.99;http://example.com/product-v;Grains
+Chewing Gum;4.99;http://example.com/product-w;Snacks
+Chocolate;14.99;http://example.com/product-x;Snacks
