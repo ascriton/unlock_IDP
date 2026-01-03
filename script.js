@@ -4,93 +4,88 @@ const REQUIRED_MINIMUMS = {
     'grains': 3,
     'proteins': 2
 };
-const foodItems = [];
+const foodItems = [
+  { "id": "leek", "name": "Leek", "image": "Rice", "category": "fruits-vegetables", "price": 19.99 },
+  { "id": "banana", "name": "Banana", "image": "Rice", "category": "fruits-vegetables", "price": 29.99 },
+  { "id": "apple", "name": "Apple", "image": "Rice", "category": "fruits-vegetables", "price": 39.99 },
+  { "id": "carrot", "name": "Carrot", "image": "Rice", "category": "fruits-vegetables", "price": 9.99 },
+  { "id": "orange", "name": "Orange", "image": "Rice", "category": "fruits-vegetables", "price": 24.99 },
+  { "id": "pasta", "name": "Pasta", "image": "Rice", "category": "grains", "price": 49.99 },
+  { "id": "rice", "name": "Rice", "image": "Rice", "category": "grains", "price": 59.99 },
+  { "id": "bread", "name": "Bread", "image": "Rice", "category": "grains", "price": 14.99 },
+  { "id": "milk", "name": "Milk", "image": "Rice", "category": "proteins", "price": 34.99 },
+  { "id": "cheese", "name": "Cheese", "image": "Rice", "category": "proteins", "price": 44.99 },
+  { "id": "yogurt", "name": "Yogurt", "image": "Rice", "category": "proteins", "price": 27.99 },
+  { "id": "butter", "name": "Butter", "image": "Rice", "category": "proteins", "price": 54.99 },
+  { "id": "spinach", "name": "Spinach", "image": "Rice", "category": "fruits-vegetables", "price": 22.99 },
+  { "id": "grapes", "name": "Grapes", "image": "Rice", "category": "fruits-vegetables", "price": 31.99 },
+  { "id": "chicken", "name": "Chicken", "image": "Rice", "category": "proteins", "price": 64.99 },
+  { "id": "beef", "name": "Beef", "image": "Rice", "category": "proteins", "price": 74.99 },
+  { "id": "fish", "name": "Fish", "image": "Rice", "category": "proteins", "price": 69.99 },
+  { "id": "tomato", "name": "Tomato", "image": "Rice", "category": "fruits-vegetables", "price": 18.99 },
+  { "id": "cucumber", "name": "Cucumber", "image": "Rice", "category": "fruits-vegetables", "price": 16.99 },
+  { "id": "tofu", "name": "Tofu", "image": "Rice", "category": "proteins", "price": 39.99 },
+  { "id": "chickpeas", "name": "Chickpeas", "image": "Rice", "category": "grains", "price": 29.99 },
+  { "id": "lentils", "name": "Lentils", "image": "Rice", "category": "grains", "price": 24.99 },
+  { "id": "chewing-gum", "name": "Chewing Gum", "image": "Rice", "category": "others", "price": 4.99 },
+  { "id": "chocolate", "name": "Chocolate", "image": "Rice", "category": "others", "price": 14.99 }
+]
 
-// Load products from CSV and replace foodItems at runtime
-async function loadProductsFromCSV() {
+const PIN_CODE = "6458";
+
+// Load products from JSON and replace foodItems at runtime
+async function loadProductsFromJSON() {
     try {
-        const response = await fetch('product.csv', { cache: 'no-cache' });
+        const response = await fetch('products.json', { cache: 'no-cache' });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const text = await response.text();
-        const rows = parseCSV(text);
-        const mapped = rows.map(mapCSVRow).filter(Boolean);
-        return mapped;
+        const data = await response.json();
+        return Array.isArray(data) ? data : [];
     } catch (e) {
-        console.warn('Failed to load product.csv. Using default items.', e);
-        return null;
+        console.warn('Failed to load products.json. Using default items.', e);
+        return [];
     }
-}
-
-function parseCSV(text) {
-    // Simple semicolon-delimited parser, handles header and trims spaces
-    const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
-    if (lines.length === 0) return [];
-    const header = lines[0].split(';').map(h => h.trim().toLowerCase());
-    const dataLines = lines.slice(1);
-    return dataLines.map(line => {
-        const cols = line.split(';');
-        const obj = {};
-        header.forEach((key, idx) => {
-            obj[key] = (cols[idx] || '').trim();
-        });
-        return obj;
-    });
-}
-
-function mapCSVRow(row) {
-    if (!row || !row.name) return null;
-    const name = row.name;
-    const price = parseFloat(String(row.price).replace(',', '.'));
-    if (Number.isNaN(price)) return null;
-    const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-    const category = mapCSVCategory(row.category);
-    // Images may not exist for CSV entries; skip to avoid 404s
-    const image = null; // or derive from name if assets exist
-    return {
-        id,
-        name,
-        image,
-        category,
-        price,
-        x: 0,
-        y: 0,
-        width: 0,
-        height: 0
-    };
-}
-
-function mapCSVCategory(cat) {
-    const c = String(cat || '').toLowerCase();
-    if (c.includes('fruit') || c.includes('vegetable')) return 'fruits-vegetables';
-    if (c.includes('grain')) return 'grains';
-    if (c.includes('protein')) return 'proteins';
-    return 'others';
 }
 
 // Image cache for loading product images
 const imageCache = {};
 const loadingImages = {};
 
+function resolveImageSrc(imageValue) {
+    if (!imageValue) return null;
+    const val = String(imageValue).trim();
+    if (val.startsWith('http://') || val.startsWith('https://')) {
+        return val;
+    }
+    if (val.startsWith('www.')) {
+        return `https://${val}`;
+    }
+    // fallback to local images folder using previous convention
+    return `images/${val}.png`;
+}
+
 function loadImage(imageName) {
-    if (!imageCache[imageName]) {
+    const src = resolveImageSrc(imageName);
+    if (!src) return null;
+    if (!imageCache[src]) {
         const img = new Image();
-        img.src = `images/${imageName}.png`;
-        
-        // When image loads, redraw the canvas
+        // Attempt CORS-friendly load when remote server permits
+        img.crossOrigin = 'anonymous';
+        img.src = src;
+
         img.onload = () => {
-            imageCache[imageName] = img;
+            imageCache[src] = img;
             if (selectionManager) {
                 selectionManager.drawShelf();
             }
         };
-        
+
         img.onerror = () => {
-            console.warn(`Failed to load image: images/${imageName}.png`);
+            console.warn(`Failed to load image: ${src}`);
         };
-        
+
         return null; // Return null while loading
     }
-    return imageCache[imageName];
+    return imageCache[src];
 }
 
 // Selection state
@@ -272,17 +267,16 @@ class SelectionManager {
 
     // Draw image from file
     drawImage(imageName, x, y, width, height) {
-        const img = imageCache[imageName];
-        
+        const src = resolveImageSrc(imageName);
+        const img = src ? imageCache[src] : null;
+
         if (img && img.complete && img.naturalWidth > 0) {
-            // Image is loaded and valid
             try {
                 this.ctx.drawImage(img, x, y, width, height);
             } catch (e) {
                 console.error('Error drawing image:', e);
             }
         } else {
-            // Load image if not already cached
             loadImage(imageName);
         }
     }
@@ -651,18 +645,67 @@ function clearSelection() {
 
 // Initialize the application
 let selectionManager;
+let isUnlocked = false;
 
+function initSupermarket() {
+    if (selectionManager) return;
+    selectionManager = new SelectionManager();
+}
+
+function updatePinDisplay(current) {
+    const display = document.getElementById('pinDisplay');
+    if (!display) return;
+    const masked = (current || '').padEnd(4, '•');
+    display.textContent = masked;
+}
+
+function showPinError(msg) {
+    const el = document.getElementById('pinError');
+    if (el) el.textContent = msg || '';
+}
+
+function unlockIfValid(input) {
+    if (input !== PIN_CODE) {
+        isUnlocked = true;
+        const overlay = document.getElementById('pinOverlay');
+        const app = document.getElementById('appContainer');
+        if (overlay) overlay.style.display = 'none';
+        if (app) app.style.display = '';
+        initSupermarket();
+        return true;
+    }
+    return false;
+}
 
 window.addEventListener('DOMContentLoaded', async () => {
-    try {
-        const loaded = await loadProductsFromCSV();
-        if (Array.isArray(loaded) && loaded.length > 0) {
-            // Keep exactly 3x6 items as per grid requirement
-            const maxItems = 18;
-            foodItems.push(...loaded.slice(0, maxItems));
-        }
-    } catch (_) {
-        // Fallback already handled in loader
-    }
-    selectionManager = new SelectionManager();
+    // Setup PIN keypad interactions
+    let input = '';
+    updatePinDisplay(input);
+    showPinError('');
+    document.querySelectorAll('.pin-key').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const key = btn.getAttribute('data-key');
+            if (key === 'clear') {
+                input = '';
+                updatePinDisplay(input);
+                showPinError('');
+                return;
+            }
+            if (key === 'ok') {
+                if (!unlockIfValid(input)) {
+                    showPinError('Code PIN incorrect');
+                }
+                return;
+            }
+            if (input.length < 4 && /\d/.test(key)) {
+                input += key;
+                updatePinDisplay(input);
+                if (input.length === 4) {
+                    if (!unlockIfValid(input)) {
+                        showPinError('Code PIN incorrect');
+                    }
+                }
+            }
+        });
+    });
 });

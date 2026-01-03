@@ -582,7 +582,29 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div id="pinOverlay" class="pin-overlay">
+        <div class="pin-content">
+            <div class="pin-header">Entrer le code PIN</div>
+            <div id="pinDisplay" class="pin-display">••••</div>
+            <div class="pin-grid">
+                <button class="pin-key" data-key="1">1</button>
+                <button class="pin-key" data-key="2">2</button>
+                <button class="pin-key" data-key="3">3</button>
+                <button class="pin-key" data-key="4">4</button>
+                <button class="pin-key" data-key="5">5</button>
+                <button class="pin-key" data-key="6">6</button>
+                <button class="pin-key" data-key="7">7</button>
+                <button class="pin-key" data-key="8">8</button>
+                <button class="pin-key" data-key="9">9</button>
+                <button class="pin-key pin-action" data-key="clear">C</button>
+                <button class="pin-key" data-key="0">0</button>
+                <button class="pin-key pin-action" data-key="ok">OK</button>
+            </div>
+            <div id="pinError" class="pin-error" aria-live="polite"></div>
+        </div>
+    </div>
+
+    <div class="container" id="appContainer" style="display:none;">
         <div class="shelf-container">
             <canvas id="supermarketCanvas" width="400" height="800"></canvas>
         </div>
@@ -627,6 +649,25 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // Minimal styles for PIN overlay
+        (function(){
+            const style = document.createElement('style');
+            style.textContent = `
+                .pin-overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); z-index: 2000; }
+                .pin-content { background: #ffffff; border-radius: 8px; padding: 16px; width: 300px; box-shadow: 0 6px 18px rgba(0,0,0,0.25); text-align: center; }
+                .pin-header { font-weight: bold; color: #2c3e50; margin-bottom: 8px; }
+                .pin-display { font-family: monospace; font-size: 22px; padding: 6px 10px; background: #f7f7f7; border-radius: 6px; margin: 6px auto 12px; width: 160px; letter-spacing: 6px; }
+                .pin-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+                .pin-key { padding: 10px 0; font-size: 16px; border: none; border-radius: 6px; background: #ecf0f1; color: #2c3e50; font-weight: bold; cursor: pointer; }
+                .pin-key:hover { background: #e0e4e6; }
+                .pin-action { background: #3498db; color: #fff; }
+                .pin-action:hover { background: #2980b9; }
+                .pin-error { color: #e74c3c; margin-top: 8px; min-height: 18px; font-size: 12px; }
+            `;
+            document.head.appendChild(style);
+        })();
+    </script>
 
 </body>
 </html>
