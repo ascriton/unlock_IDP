@@ -52,12 +52,12 @@
         }
 
         #supermarketCanvas {
-            border: 2px solid #34495e;
             border-radius: 6px;
             cursor: crosshair;
             background: linear-gradient(180deg, #ecf0f1 0%, #bdc3c7 100%);
             display: block;
-            width: 100%;
+            width: clamp(320px, 90vw, 600px);
+            aspect-ratio: 600 / 975;
             height: auto;
         }
 
@@ -604,12 +604,13 @@
         </div>
     </div>
 
-    <div class="container" id="appContainer" style="display:none;">
-        <div class="shelf-container">
-            <canvas id="supermarketCanvas" width="400" height="800"></canvas>
-        </div>
+    <div class="shelf-container">
+        <canvas id="supermarketCanvas" width="400" height="800"></canvas>
+    </div>
 
+    <div class="container" id="appContainer" style="display:none;">
         <div class="info-panel">
+            <div id="lastSelectedRow" class="last-selected-row"></div>
             <div class="budget-panel">
                 <div class="budget-title">Caisse:</div>
                 <div class="budget-inline">
@@ -619,7 +620,7 @@
                     </div>
                     <div class="budget-item">
                         <span class="budget-label">Budget</span>
-                        <span class="budget-amount">€30</span>
+                        <span class="budget-amount" id="budgetTotal">€0</span>
                     </div>
                     <div class="budget-item">
                         <span class="budget-label">Restant</span>
@@ -627,12 +628,12 @@
                     </div>
                 </div>
             </div>
+            <div class="controls">
+                <button class="validate-btn" onclick="validateSelection()">✓ OK</button>
+                <button class="clear-btn" onclick="clearSelection()">✕ Effacer</button>
+            </div>
         </div>
 
-        <div class="controls">
-            <button class="validate-btn" onclick="validateSelection()">✓ OK</button>
-            <button class="clear-btn" onclick="clearSelection()">✕ Effacer</button>
-        </div>
     </div>
 
     <!-- Modal/Popup -->
@@ -643,7 +644,7 @@
             </div>
             <div id="modalBody" class="modal-body"></div>
             <div class="modal-footer">
-                <button id="modalCloseBtn" class="modal-close-btn" onclick="closeModal()">OK</button>
+                <button id="modalCloseBtn" class="modal-close-btn" onclick="closeModal()">Fermer</button>
             </div>
         </div>
     </div>
@@ -654,6 +655,10 @@
         (function(){
             const style = document.createElement('style');
             style.textContent = `
+                .info-panel { position: fixed; left: 0; right: 0; bottom: 0px; z-index: 1000; flex-direction: column; align-items: stretch; }
+                .last-selected-row { font: bold 12px Arial; color: #333; padding: 4px 0; min-height: 18px; }
+                .shelf-container { overflow: auto; height: 100vh; padding-bottom: calc(var(--info-panel-height, 150px) + 450px); }
+                #supermarketCanvas { width: clamp(320px, 90vw, 600px); height: auto; }
                 .pin-overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); z-index: 2000; }
                 .pin-content { background: #ffffff; border-radius: 8px; padding: 16px; width: 300px; box-shadow: 0 6px 18px rgba(0,0,0,0.25); text-align: center; }
                 .pin-header { font-weight: bold; color: #2c3e50; margin-bottom: 8px; }
